@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heysprouts! Unified Micro-ERP (Interactive Draft)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .collapsible-row { display: none; }
+        .collapsible-row.open { display: table-row; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen pb-12">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showModule('landing')">
+                <div class="bg-white text-emerald-700 p-2 rounded-lg font-extrabold text-xl shadow-inner">🌱</div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Heysprouts!</h1>
+                    <p class="text-xs text-emerald-200">Unified Operations Hub (Draft v2.1)</p>
+                </div>
+            </div>
+            <div id="current-module-badge" class="hidden sm:block text-xs bg-emerald-800 text-emerald-100 px-3 py-1.5 rounded-full font-medium">
+                Active: Main Business Selector
+            </div>
+            <button onclick="showModule('landing')" class="text-xs bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-md font-semibold transition">
+                Switch Module
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+
+        <!-- ========================================== -->
+        <!-- 0. LANDING PAGE / MODULE SELECTOR          -->
+        <!-- ========================================== -->
+        <section id="module-landing" class="space-y-6">
+            <div class="text-center max-w-2xl mx-auto my-4">
+                <h2 class="text-2xl font-bold text-slate-900">Welcome Back!</h2>
+                <p class="text-slate-600 text-sm mt-1">Select a business unit to enter daily information, manage inventory, or view financials.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- 1. Hotel Laundry -->
+                <div onclick="showModule('laundry')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="p-3 rounded-lg bg-blue-100 text-blue-700 text-xl">🧺</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-blue-50 text-blue-700 rounded">Main B2B Revenue</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800">Hotel Laundry</h3>
+                        <p class="text-xs text-slate-500 mt-1">B2B hotel billing, weight/hours tracking, and staff salary payroll logs.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-emerald-600">
+                        <span>Open Dashboard</span> <span>→</span>
+                    </div>
+                </div>
+
+                <!-- 2. Basic Kneads -->
+                <div onclick="showModule('cafe')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="p-3 rounded-lg bg-amber-100 text-amber-700 text-xl">🍞</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-amber-50 text-amber-700 rounded">Festive & Bakery</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800">Basic Kneads</h3>
+                        <p class="text-xs text-slate-500 mt-1">Pre-orders, receipt OCR & digital file upload, manual key-ins, and ingredient batch planner.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-emerald-600">
+                        <span>Open Dashboard</span> <span>→</span>
+                    </div>
+                </div>
+
+                <!-- 3. Soap For Hope -->
+                <div onclick="showModule('soap')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="p-3 rounded-lg bg-teal-100 text-teal-700 text-xl">🧼</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-teal-50 text-teal-700 rounded">Repurposing</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800">Soap For Hope</h3>
+                        <p class="text-xs text-slate-500 mt-1">Raw scrap yield calculations, finished soap stock, and donor impact reports.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-emerald-600">
+                        <span>Open Dashboard</span> <span>→</span>
+                    </div>
+                </div>
+
+                <!-- 4. Workshops -->
+                <div onclick="showModule('workshops')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="p-3 rounded-lg bg-purple-100 text-purple-700 text-xl">🎨</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-purple-50 text-purple-700 rounded">Corporate Events</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800">Workshops</h3>
+                        <p class="text-xs text-slate-500 mt-1">Interactive material checklist, dynamic pax quotes, and packing lists.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-emerald-600">
+                        <span>Open Dashboard</span> <span>→</span>
+                    </div>
+                </div>
+
+                <!-- 5. Giving Hap-pea-ness -->
+                <div onclick="showModule('veggies')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="p-3 rounded-lg bg-emerald-100 text-emerald-700 text-xl">🥬</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-emerald-50 text-emerald-700 rounded">Charity Produce</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800">Giving Hap-pea-ness</h3>
+                        <p class="text-xs text-slate-500 mt-1">Wholesale receipt upload, completed bags input, and auto net-costing.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-emerald-600">
+                        <span>Open Dashboard</span> <span>→</span>
+                    </div>
+                </div>
+
+                <!-- 6. Master P&L -->
+                <div onclick="showModule('master')" class="bg-slate-900 text-white p-5 rounded-xl shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="p-3 rounded-lg bg-slate-800 text-emerald-400 text-xl">📊</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-emerald-900 text-emerald-300 rounded">Consolidated Vault</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Master P&L & Vault</h3>
+                        <p class="text-xs text-slate-400 mt-1">Overall profit & loss, interactive row drill-down details, and donor funds.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs font-semibold text-emerald-400">
+                        <span>View Master Accounts</span> <span>→</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 1. HOTEL LAUNDRY MODULE                    -->
+        <!-- ========================================== -->
+        <section id="module-laundry" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div>
+                    <span class="text-xs font-semibold text-blue-700 bg-blue-100 px-2.5 py-1 rounded">Active Context: Hotel Laundry</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">B2B Laundry Billing & Payroll Engine</h2>
+                </div>
+                <button onclick="showModule('landing')" class="mt-2 sm:mt-0 text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg font-medium">← Back to Business Selector</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Hotel Invoicing Calculator -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">🧾 Create B2B Monthly Invoice</h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="font-medium text-slate-700">Hotel / Client Partner</label>
+                            <input type="text" value="Marina Bay Boutique Hotel" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="font-medium text-slate-700">Laundry Weight (kg)</label>
+                                <input id="laundry-weight" type="number" value="250" oninput="calcLaundryInvoice()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="font-medium text-slate-700">Rate ($ / kg)</label>
+                                <input id="laundry-rate" type="number" value="3.50" step="0.10" oninput="calcLaundryInvoice()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg border border-blue-200 flex justify-between items-center font-bold text-blue-900">
+                            <span>Calculated Monthly Invoice:</span>
+                            <span id="laundry-total-invoice" class="text-base">$875.00</span>
+                        </div>
+                        <button onclick="alert('B2B Invoice generated & logged in Master P&L under Hotel Laundry.')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">Generate & Email Hotel Statement</button>
+                    </div>
+                </div>
+
+                <!-- Staff & Youth Shift Payroll Logger -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">⏱️ Log Staff / Youth Shift Hours</h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="font-medium text-slate-700">Select Staff Member / Youth</label>
+                            <select id="staff-name" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                                <option>Alex Tan (Youth Facilitator)</option>
+                                <option>Siti Rahmah (Laundry Lead)</option>
+                                <option>John Lim (Assistant)</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="font-medium text-slate-700">Hours Worked</label>
+                                <input id="shift-hours" type="number" value="5" oninput="calcShiftPay()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="font-medium text-slate-700">Hourly Rate ($ / hr)</label>
+                                <input id="shift-rate" type="number" value="12.00" oninput="calcShiftPay()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex justify-between items-center font-bold text-slate-800">
+                            <span>Shift Allowance Earned:</span>
+                            <span id="shift-total-pay" class="text-base text-emerald-700">$60.00</span>
+                        </div>
+                        <button onclick="logShiftToPayroll()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg transition">Post to Master Payroll Ledger</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 2. BASIC KNEADS (FESTIVE & BAKERY)         -->
+        <!-- ========================================== -->
+        <section id="module-cafe" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div>
+                    <span class="text-xs font-semibold text-amber-700 bg-amber-100 px-2.5 py-1 rounded">Active Context: Basic Kneads</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">Festive Pre-Orders & Restock Expenses Manager</h2>
+                </div>
+                <button onclick="showModule('landing')" class="mt-2 sm:mt-0 text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg font-medium">← Back to Business Selector</button>
+            </div>
+
+            <!-- Top Row: Intake Forms -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Festive Pre-Order Intake Form -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">🥮 Log Client Festive Pre-Order</h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="font-medium text-slate-700">Customer / Corporate Contact Name</label>
+                            <input id="bake-customer" type="text" placeholder="e.g. Rachel Tan" value="Rachel Tan" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-2">
+                                <label class="font-medium text-slate-700">Festive Product Package</label>
+                                <select id="bake-package" onchange="updateBakePrice()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                                    <option value="38.00">CNY Pineapple Tart Set ($38.00)</option>
+                                    <option value="28.00">Festival Butter Cookie Tin ($28.00)</option>
+                                    <option value="45.00">Festive Artisan Focaccia Bundle ($45.00)</option>
+                                    <option value="68.00">Grand Festive Bakery Gift Box ($68.00)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="font-medium text-slate-700">Unit Price ($)</label>
+                                <input id="bake-unit-price" type="number" value="38.00" oninput="updateBakePriceManual()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="font-medium text-slate-700">Quantity (Sets)</label>
+                                <input id="bake-qty" type="number" value="2" min="1" oninput="updateBakePrice()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="font-medium text-slate-700">Delivery / Pickup Date</label>
+                                <input id="bake-date" type="date" value="2026-09-20" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-medium text-slate-700">Payment Method & Status</label>
+                            <select id="bake-payment-status" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                                <option value="PayNow Verified">🟢 PayNow Verified</option>
+                                <option value="Pending Payment">🟡 Pending Payment</option>
+                                <option value="Paid Cash">🟢 Cash Received</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 flex justify-between items-center font-bold text-amber-900">
+                            <span>Order Total Amount:</span>
+                            <span id="bake-order-total" class="text-base">$76.00</span>
+                        </div>
+
+                        <button onclick="addFestiveOrder()" class="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition">📦 Log Pre-Order & Post to Master P&L</button>
+                    </div>
+                </div>
+
+                <!-- Raw Ingredient Restock & Receipt Entry (OCR / Digital File / Manual Key-In) -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">🛒 Ingredient Restock Expense Intake</h3>
+                        <span class="text-[10px] bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded">3 Input Methods</span>
+                    </div>
+
+                    <!-- Input Method Selector Tabs -->
+                    <div class="flex border-b border-slate-200 text-xs">
+                        <button id="tab-btn-ocr" onclick="switchRestockTab('ocr')" class="py-2 px-3 border-b-2 border-amber-600 font-bold text-amber-800">📸 OCR Scan</button>
+                        <button id="tab-btn-upload" onclick="switchRestockTab('upload')" class="py-2 px-3 text-slate-500 hover:text-slate-800 font-medium">📄 Upload Digital Receipt</button>
+                        <button id="tab-btn-manual" onclick="switchRestockTab('manual')" class="py-2 px-3 text-slate-500 hover:text-slate-800 font-medium">✏️ Manual Key-In</button>
+                    </div>
+
+                    <!-- 1. OCR Camera / Scan Simulation -->
+                    <div id="restock-tab-ocr" class="space-y-3 text-xs">
+                        <p class="text-slate-500">Scan paper receipt photo to extract raw baking supplies expenses.</p>
+                        <div onclick="simulateBakeOCR()" class="border-2 border-dashed border-amber-300 hover:border-amber-500 bg-amber-50/50 rounded-lg p-4 text-center cursor-pointer transition">
+                            <div class="text-2xl mb-1">📷</div>
+                            <span class="font-semibold text-amber-900">Click to Simulate OCR Camera Scan</span>
+                            <p class="text-[10px] text-slate-400 mt-1">Reads Phoon Huat Baking Supplies: $145.00 (Flour, Butter, Sugar)</p>
+                        </div>
+                        <div id="ocr-bake-result" class="hidden p-3 bg-emerald-50 border border-emerald-200 rounded-lg space-y-1">
+                            <div class="flex justify-between font-bold text-emerald-900">
+                                <span>Vendor Extracted: Phoon Huat</span>
+                                <span>Amount: $145.00</span>
+                            </div>
+                            <p class="text-[11px] text-emerald-700">Extracted Items: 25kg Flour, 10kg Anchor Butter, Baking Powder</p>
+                            <span class="inline-block mt-1 text-[10px] bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded font-semibold">Verification: OCR Verified Receipt</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Digital File Upload -->
+                    <div id="restock-tab-upload" class="hidden space-y-3 text-xs">
+                        <p class="text-slate-500">Attach digital e-receipt PDF, image file, or supplier invoice.</p>
+                        <div class="border-2 border-dashed border-slate-300 hover:border-amber-500 rounded-lg p-4 text-center cursor-pointer bg-slate-50">
+                            <input type="file" id="digital-receipt-file" class="hidden" onchange="handleDigitalUpload(event)">
+                            <label for="digital-receipt-file" class="cursor-pointer space-y-1 block">
+                                <div class="text-2xl">📎</div>
+                                <div id="upload-file-label" class="font-semibold text-slate-700">Click to select digital PDF or JPG receipt</div>
+                                <div class="text-[10px] text-slate-400">Supported formats: PDF, PNG, JPG (Max 5MB)</div>
+                            </label>
+                        </div>
+                        <div id="upload-summary" class="hidden p-2.5 bg-blue-50 border border-blue-200 rounded text-blue-900 flex justify-between items-center">
+                            <span id="upload-file-name" class="font-medium truncate">receipt_phoonhuat_sept.pdf</span>
+                            <span class="text-[10px] bg-blue-200 text-blue-800 px-2 py-0.5 rounded font-bold">Digital Receipt Attached</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Manual Key-In (No Receipt) -->
+                    <div id="restock-tab-manual" class="hidden space-y-3 text-xs">
+                        <div class="p-2 bg-amber-50 border border-amber-200 rounded text-amber-900 text-[11px] flex justify-between items-center">
+                            <span>⚠️ Manual Key-In Mode</span>
+                            <span class="font-bold text-amber-800 bg-amber-200 px-2 py-0.5 rounded text-[10px]">Will be tagged as "No Receipt"</span>
+                        </div>
+                        <div>
+                            <label class="font-medium text-slate-700">Supplier / Store Name</label>
+                            <input id="manual-vendor" type="text" placeholder="e.g. Local Wet Market / NTUC FairPrice" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="font-medium text-slate-700">Item Description</label>
+                                <input id="manual-items" type="text" placeholder="e.g. Eggs & Fresh Pineapple" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="font-medium text-slate-700">Total Spent ($)</label>
+                                <input id="manual-amount" type="number" placeholder="55.00" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shared Action Button -->
+                    <button onclick="postIngredientExpense()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs rounded-lg transition">🧾 Post Restock Expense to Master Vault</button>
+                </div>
+            </div>
+
+            <!-- Pre-Orders Overview & Bake Run Calculator -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Metrics Row -->
+                <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="p-3 bg-white border border-slate-200 rounded-xl shadow-sm">
+                        <div class="text-[11px] font-semibold text-slate-500">Total Pre-Orders Logged</div>
+                        <div id="metric-orders-count" class="text-xl font-bold text-slate-800 mt-1">2 Orders</div>
+                    </div>
+                    <div class="p-3 bg-white border border-slate-200 rounded-xl shadow-sm">
+                        <div class="text-[11px] font-semibold text-slate-500">Total Pre-Order Revenue</div>
+                        <div id="metric-orders-revenue" class="text-xl font-bold text-amber-600 mt-1">$280.00</div>
+                    </div>
+                    <div class="p-3 bg-white border border-slate-200 rounded-xl shadow-sm">
+                        <div class="text-[11px] font-semibold text-slate-500">Pending Deliveries</div>
+                        <div id="metric-pending-deliveries" class="text-xl font-bold text-emerald-600 mt-1">2 Batches</div>
+                    </div>
+                </div>
+
+                <!-- Active Festive Pre-Orders Table -->
+                <div class="lg:col-span-2 bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-sm">📜 Active Pre-Orders Log</h3>
+                        <button onclick="exportFestiveOrders()" class="text-xs text-amber-700 hover:underline font-semibold">📄 Export Delivery Schedule</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-600">
+                            <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-2">Customer</th>
+                                    <th class="p-2">Items Ordered</th>
+                                    <th class="p-2">Due Date</th>
+                                    <th class="p-2">Amount</th>
+                                    <th class="p-2">Status</th>
+                                    <th class="p-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="festive-orders-table" class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-2 font-medium text-slate-800">Rachel Tan</td>
+                                    <td class="p-2">2x CNY Pineapple Tart Set</td>
+                                    <td class="p-2">20 Sep 2026</td>
+                                    <td class="p-2 font-bold text-slate-900">$76.00</td>
+                                    <td class="p-2"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-semibold">PayNow Verified</span></td>
+                                    <td class="p-2"><button onclick="toggleFulfill(this)" class="bg-amber-100 text-amber-800 hover:bg-amber-200 text-[10px] px-2 py-0.5 rounded font-bold">Mark Fulfilled</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-medium text-slate-800">DBS CSR Team</td>
+                                    <td class="p-2">3x Grand Festive Bakery Box</td>
+                                    <td class="p-2">22 Sep 2026</td>
+                                    <td class="p-2 font-bold text-slate-900">$204.00</td>
+                                    <td class="p-2"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-semibold">PayNow Verified</span></td>
+                                    <td class="p-2"><button onclick="toggleFulfill(this)" class="bg-amber-100 text-amber-800 hover:bg-amber-200 text-[10px] px-2 py-0.5 rounded font-bold">Mark Fulfilled</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bake Run Batch Ingredient Requirements Calculator -->
+                <div class="lg:col-span-1 bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                    <h3 class="font-bold text-slate-800 text-sm">🥣 Batch Ingredient Requirements Planner</h3>
+                    <p class="text-xs text-slate-500">Calculate required raw materials for scheduled festive production runs.</p>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="font-medium text-slate-700">Select Production Batch Target</label>
+                            <select id="batch-target-item" onchange="calculateBakeIngredients()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                                <option value="pineapple">CNY Pineapple Tarts (50 Boxes Target)</option>
+                                <option value="cookies">Butter Cookie Tins (40 Tins Target)</option>
+                                <option value="focaccia">Festive Focaccia (30 Loaves Target)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-medium text-slate-700">Planned Batch Multiplier</label>
+                            <input id="batch-multiplier" type="number" value="1" min="1" oninput="calculateBakeIngredients()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                        </div>
+                    </div>
+
+                    <div id="ingredient-breakdown" class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs space-y-1.5 text-amber-950">
+                        <div class="font-bold text-amber-900 border-b border-amber-200 pb-1 flex justify-between">
+                            <span>Calculated Raw Material Needs:</span>
+                            <span id="ingredient-cost-est">Est. Cost: $125.00</span>
+                        </div>
+                        <div class="flex justify-between"><span>• Specialty Baking Flour:</span> <span id="ing-flour" class="font-semibold">12.5 kg</span></div>
+                        <div class="flex justify-between"><span>• Premium Anchor Butter:</span> <span id="ing-butter" class="font-semibold">8.0 kg</span></div>
+                        <div class="flex justify-between"><span>• Pineapple Jam Filling:</span> <span id="ing-filling" class="font-semibold">15.0 kg</span></div>
+                        <div class="flex justify-between"><span>• Egg Wash & Spices:</span> <span id="ing-spices" class="font-semibold">30 Eggs / Spice Mix</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 3. SOAP FOR HOPE MODULE                    -->
+        <!-- ========================================== -->
+        <section id="module-soap" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div>
+                    <span class="text-xs font-semibold text-teal-700 bg-teal-100 px-2.5 py-1 rounded">Active Context: Soap For Hope</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">Repurposing Yield & Overseas Shipments</h2>
+                </div>
+                <button onclick="showModule('landing')" class="mt-2 sm:mt-0 text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg font-medium">← Back to Business Selector</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Soap Processing Batch Logger -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm">🧼 Log Sanitization Batch Run</h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="font-medium text-slate-700">Raw Scrap Used (kg)</label>
+                                <input id="soap-scrap-kg" type="number" value="15.0" oninput="calcSoapYield()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="font-medium text-slate-700">Finished Bars Produced</label>
+                                <input id="soap-bars-out" type="number" value="180" oninput="calcSoapYield()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                            </div>
+                        </div>
+                        <div class="bg-teal-50 p-3 rounded-lg border border-teal-200 flex justify-between items-center text-teal-900">
+                            <span class="font-semibold">Calculated Sanitization Yield:</span>
+                            <span id="soap-yield-percent" class="font-bold text-base">80.0% Yield</span>
+                        </div>
+                        <button onclick="alert('Batch logged! Stock updated: 180 bars added to Finished Soap Inventory.')" class="w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition">Update Finished Soap Stock</button>
+                    </div>
+                </div>
+
+                <!-- Grant Balance & Impact Report Generator -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm">💰 Donor Grant Balances & Impact PDF</h3>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="font-bold text-slate-800">Rotary Club Sponsorship:</span>
+                            <span class="text-teal-700 font-bold">$1,200.00 left</span>
+                        </div>
+                        <div class="flex justify-between text-slate-500">
+                            <span>Hotel Partner Grant:</span>
+                            <span>$450.00 left</span>
+                        </div>
+                    </div>
+                    <button onclick="generateSoapImpactPDF()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs rounded-lg transition">📄 Generate Donor Impact Report PDF</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 4. WORKSHOPS MODULE                        -->
+        <!-- ========================================== -->
+        <section id="module-workshops" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div>
+                    <span class="text-xs font-semibold text-purple-700 bg-purple-100 px-2.5 py-1 rounded">Active Context: Workshops</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">Corporate Workshop Builder & Packing List</h2>
+                </div>
+                <button onclick="showModule('landing')" class="mt-2 sm:mt-0 text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg font-medium">← Back to Business Selector</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Interactive Quote Configurator -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm">🎨 Interactive Corporate Event Builder</h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="font-medium text-slate-700">Client / Corporate Name</label>
+                            <input type="text" value="DBS Innovation CSR Team" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="font-medium text-slate-700">Number of Participants (Pax)</label>
+                            <input id="workshop-pax" type="number" value="25" oninput="calcWorkshopQuote()" class="w-full mt-1 p-2 border border-slate-300 rounded-lg">
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-2">
+                            <label class="font-bold text-slate-800 block mb-1">Select Custom Add-On Materials:</label>
+                            <div class="space-y-1.5">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" checked disabled class="accent-purple-600">
+                                    <span>Basic Soap Base & Molds ($25/pax base)</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input id="addon-oils" type="checkbox" checked onchange="calcWorkshopQuote()" class="accent-purple-600">
+                                    <span>Premium Essential Oils Add-On (+$3/pax)</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input id="addon-flowers" type="checkbox" onchange="calcWorkshopQuote()" class="accent-purple-600">
+                                    <span>Dried Flowers & Botanicals Bar (+$2/pax)</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input id="addon-boxes" type="checkbox" checked onchange="calcWorkshopQuote()" class="accent-purple-600">
+                                    <span>Eco Gift Packaging Box (+$2/pax)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 p-3 rounded-lg border border-purple-200 space-y-1">
+                            <div class="flex justify-between font-medium text-purple-900">
+                                <span>Calculated Rate / Pax:</span>
+                                <span id="ws-rate-pax" class="font-bold">$30.00 / pax</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-purple-950 text-sm pt-1 border-t border-purple-200">
+                                <span>Total Quote (25 Pax):</span>
+                                <span id="ws-total-quote" class="text-base text-purple-700">$750.00</span>
+                            </div>
+                        </div>
+                        <button onclick="alert('PDF Quotation generated & payment link generated for client.')" class="w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition">Generate PDF Quote & PayNow Link</button>
+                    </div>
+                </div>
+
+                <!-- Mobile Event Packing Checklist -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm">📦 Mobile Event Packing Checklist</h3>
+                    <p class="text-xs text-slate-500">Auto-calculated materials required for 25 pax event:</p>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-center justify-between p-2 bg-slate-50 rounded border border-slate-200 cursor-pointer">
+                            <span>[✓] 5.0 kg Melt & Pour Soap Base</span>
+                            <input type="checkbox" checked class="accent-purple-600">
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-slate-50 rounded border border-slate-200 cursor-pointer">
+                            <span>[✓] 30x Silicone Molds</span>
+                            <input type="checkbox" checked class="accent-purple-600">
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-slate-50 rounded border border-slate-200 cursor-pointer">
+                            <span>[✓] 25x Essential Oil Bottles & Mixers</span>
+                            <input type="checkbox" class="accent-purple-600">
+                        </label>
+                    </div>
+                    <button onclick="alert('Deducted 5kg soap base and materials from Soap For Hope inventory.')" class="w-full py-2 bg-slate-800 text-white text-xs font-semibold rounded-lg">Confirm & Deduct Material Stock</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 5. GIVING HAP-PEA-NESS MODULE              -->
+        <!-- ========================================== -->
+        <section id="module-veggies" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div>
+                    <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded">Active Context: Giving Hap-pea-ness</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">Vegetable Packing & Distribution</h2>
+                </div>
+                <button onclick="showModule('landing')" class="mt-2 sm:mt-0 text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg font-medium">← Back to Business Selector</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Quick OCR Receipt & Bag Logger -->
+                <div class="lg:col-span-1 bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">📸 1. Upload Wholesale Receipt</h3>
+                    <p class="text-xs text-slate-500">Upload produce receipt. The system automatically attributes expenses directly to Giving Hap-pea-ness.</p>
+                    
+                    <div class="border-2 border-dashed border-slate-300 hover:border-emerald-500 rounded-lg p-4 text-center cursor-pointer bg-slate-50 transition" onclick="simulateVeggieOCR()">
+                        <div class="text-2xl mb-1">🧾</div>
+                        <p class="text-xs font-semibold text-slate-700">Click to Simulate Receipt Scan</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Simulates OCR reading $600.00 (120 kg produce)</p>
+                    </div>
+
+                    <div id="veggie-ocr-result" class="hidden bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-xs space-y-1">
+                        <div class="flex justify-between font-bold text-emerald-900">
+                            <span>Total Extracted:</span> <span>$600.00</span>
+                        </div>
+                        <div class="flex justify-between text-emerald-700">
+                            <span>Extracted Weight:</span> <span>120.0 kg</span>
+                        </div>
+                        <div class="text-[10px] text-emerald-600 italic mt-1">✓ Auto-allocated to Giving Hap-pea-ness Ledger</div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">🥦 2. Input Completed Bags</h3>
+                    <div class="space-y-2">
+                        <label class="text-xs font-medium text-slate-700">Final Completed Family Bundles</label>
+                        <input id="completed-bags-input" type="number" placeholder="e.g. 40" value="40" oninput="calculateVeggieYield()" class="w-full text-sm p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-2 text-xs">
+                        <div class="flex justify-between text-slate-600">
+                            <span>Target Bag Weight:</span>
+                            <span id="calc-bag-weight" class="font-bold text-slate-800">3.0 kg / bag</span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>Net Cost Per Delivered Bag:</span>
+                            <span id="calc-net-cost" class="font-bold text-emerald-700">$17.25 / bag</span>
+                        </div>
+                        <div class="text-[10px] text-slate-400">Includes wholesale produce ($15.00), packaging ($0.75), and youth stipends ($1.50).</div>
+                    </div>
+
+                    <button onclick="saveVeggieBatch()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-lg transition">Confirm & Log Campaign Batch</button>
+                </div>
+
+                <!-- Active Campaign Logs & Donor Summaries -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-sm mb-3">💚 Active Sponsor Funds & Balances</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                                <div class="text-xs font-semibold text-emerald-800">DBS Foundation Grant</div>
+                                <div class="text-lg font-bold text-emerald-900 mt-1">$800.00 <span class="text-xs font-normal text-emerald-700">remaining</span></div>
+                                <div class="text-[10px] text-emerald-600 mt-1">40 bags funded in this batch</div>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                <div class="text-xs font-semibold text-slate-700">Community Donor Pool</div>
+                                <div class="text-lg font-bold text-slate-800 mt-1">$150.00 <span class="text-xs font-normal text-slate-500">remaining</span></div>
+                                <div class="text-[10px] text-slate-500 mt-1">Available for next campaign run</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-bold text-slate-800 text-sm">📜 Recent Produce Batches</h3>
+                            <button onclick="alert('Exporting Sponsor PDF Impact Summary...')" class="text-xs text-emerald-700 hover:underline font-semibold">📄 Export Sponsor Impact PDF</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs text-slate-600">
+                                <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+                                    <tr>
+                                        <th class="p-2">Batch ID</th>
+                                        <th class="p-2">Wholesale Wt</th>
+                                        <th class="p-2">Packed Bags</th>
+                                        <th class="p-2">Cost/Bag</th>
+                                        <th class="p-2">Sponsor</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="veggie-batch-table" class="divide-y divide-slate-100">
+                                    <tr>
+                                        <td class="p-2 font-medium text-slate-800">#VP-2026-08</td>
+                                        <td class="p-2">120.0 kg</td>
+                                        <td class="p-2">40 bags</td>
+                                        <td class="p-2 font-bold text-emerald-700">$17.25</td>
+                                        <td class="p-2"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded">DBS Grant</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 6. MASTER P&L MODULE (Interactive Drilldown)-->
+        <!-- ========================================== -->
+        <section id="module-master" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-900 text-white p-4 rounded-xl shadow-sm">
+                <div>
+                    <span class="text-xs font-semibold text-emerald-400 bg-emerald-950 border border-emerald-800 px-2.5 py-1 rounded">Consolidated Financial Hub</span>
+                    <h2 class="text-xl font-bold mt-1">Master P&L & Central Receipt Vault</h2>
+                </div>
+                <button onclick="showModule('landing')" class="mt-2 sm:mt-0 text-xs text-slate-300 bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg font-medium">← Back to Business Selector</button>
+            </div>
+
+            <!-- Revenue Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500">Total Consolidated Revenue</div>
+                    <div id="master-total-rev" class="text-2xl font-extrabold text-slate-900 mt-1">$18,668.00</div>
+                    <div class="text-[10px] text-emerald-600 mt-1">Includes Laundry, Festive Bakery & Workshops</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500">Total Operational Expenses</div>
+                    <div id="master-total-exp" class="text-2xl font-extrabold text-slate-900 mt-1">$11,325.00</div>
+                    <div class="text-[10px] text-slate-400 mt-1">Payroll, Ingredients & Transport</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500">Net Commercial Operating Profit</div>
+                    <div id="master-net-profit" class="text-2xl font-extrabold text-emerald-600 mt-1">+$7,343.00</div>
+                    <div class="text-[10px] text-emerald-600 mt-1">Separated from $2,600 Donor Reserve</div>
+                </div>
+            </div>
+
+            <!-- Central Vault Table with Click-to-Expand Drill-Downs -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm">📂 Central Receipt & Master Ledger Vault</h3>
+                        <p class="text-xs text-slate-500">Click on any row below to expand granular itemized details, verification badges, and digital receipt files.</p>
+                    </div>
+                    <button onclick="toggleAllMasterRows()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded font-semibold border border-slate-300 transition">
+                        🔍 Expand/Collapse All Details
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-600">
+                        <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+                            <tr>
+                                <th class="p-2.5"></th>
+                                <th class="p-2.5">Date</th>
+                                <th class="p-2.5">Vendor / Source</th>
+                                <th class="p-2.5">Amount</th>
+                                <th class="p-2.5">Assigned Module</th>
+                                <th class="p-2.5">Receipt / Audit Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-vault-table" class="divide-y divide-slate-100">
+                            
+                            <!-- ROW 1 MAIN -->
+                            <tr onclick="toggleRowDetail('row1')" class="hover:bg-slate-50 cursor-pointer transition font-medium">
+                                <td class="p-2.5 text-slate-400 font-bold" id="icon-row1">▶</td>
+                                <td class="p-2.5 text-slate-800">11 Sep 2026</td>
+                                <td class="p-2.5 font-bold text-slate-900">Ghim Moh Wholesale Veggies</td>
+                                <td class="p-2.5 font-bold text-slate-900">-$600.00</td>
+                                <td class="p-2.5"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-semibold">Giving Hap-pea-ness</span></td>
+                                <td class="p-2.5"><span class="text-emerald-700 font-semibold">🟢 OCR Verified Receipt</span></td>
+                            </tr>
+                            <!-- ROW 1 DETAIL -->
+                            <tr id="detail-row1" class="collapsible-row bg-slate-50/80 border-l-4 border-emerald-500">
+                                <td colspan="6" class="p-4 text-xs space-y-2">
+                                    <div class="font-bold text-slate-800 border-b border-slate-200 pb-1 flex justify-between">
+                                        <span>🔍 Detailed Breakdown: Ghim Moh Wholesale Veggies</span>
+                                        <span class="text-slate-500 text-[11px]">Transaction ID: #GHP-2026-8821</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-slate-600 pt-1">
+                                        <div><strong class="text-slate-700">Purchased Items:</strong> 120 kg Assorted Green Vegetables (Kangkong, Spinach, Choy Sum)</div>
+                                        <div><strong class="text-slate-700">Verification Source:</strong> Mobile Photo OCR Auto-Extract</div>
+                                        <div><strong class="text-slate-700">Funding Pool:</strong> DBS Foundation Grant (#GRANT-DBS-2026)</div>
+                                    </div>
+                                    <div class="pt-2 flex gap-2">
+                                        <button onclick="alert('Viewing digital receipt image: ghim_moh_600.jpg')" class="bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded text-[11px] font-semibold">📄 View Attached Receipt Image</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- ROW 2 MAIN -->
+                            <tr onclick="toggleRowDetail('row2')" class="hover:bg-slate-50 cursor-pointer transition font-medium">
+                                <td class="p-2.5 text-slate-400 font-bold" id="icon-row2">▶</td>
+                                <td class="p-2.5 text-slate-800">10 Sep 2026</td>
+                                <td class="p-2.5 font-bold text-slate-900">Phoon Huat Baking Supplies</td>
+                                <td class="p-2.5 font-bold text-slate-900">-$145.00</td>
+                                <td class="p-2.5"><span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-semibold">Basic Kneads</span></td>
+                                <td class="p-2.5"><span class="text-emerald-700 font-semibold">🟢 OCR Verified Receipt</span></td>
+                            </tr>
+                            <!-- ROW 2 DETAIL -->
+                            <tr id="detail-row2" class="collapsible-row bg-slate-50/80 border-l-4 border-amber-500">
+                                <td colspan="6" class="p-4 text-xs space-y-2">
+                                    <div class="font-bold text-slate-800 border-b border-slate-200 pb-1 flex justify-between">
+                                        <span>🔍 Detailed Breakdown: Phoon Huat Restock</span>
+                                        <span class="text-slate-500 text-[11px]">Transaction ID: #BK-2026-0941</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-slate-600 pt-1">
+                                        <div><strong class="text-slate-700">Purchased Items:</strong> 25kg Specialty Flour ($45), 10kg Anchor Butter ($70), Pineapple Jam ($30)</div>
+                                        <div><strong class="text-slate-700">Batch Target:</strong> CNY Pineapple Tarts & Cookie Production Target</div>
+                                        <div><strong class="text-slate-700">Payment Channel:</strong> Company PayNow / Corporate Debit</div>
+                                    </div>
+                                    <div class="pt-2 flex gap-2">
+                                        <button onclick="alert('Viewing digital receipt e-PDF: phoon_huat_invoice.pdf')" class="bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded text-[11px] font-semibold">📄 View Attached e-Invoice PDF</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- ROW 3 MAIN -->
+                            <tr onclick="toggleRowDetail('row3')" class="hover:bg-slate-50 cursor-pointer transition font-medium">
+                                <td class="p-2.5 text-slate-400 font-bold" id="icon-row3">▶</td>
+                                <td class="p-2.5 text-slate-800">08 Sep 2026</td>
+                                <td class="p-2.5 font-bold text-slate-900">Commercial Detergent Ltd</td>
+                                <td class="p-2.5 font-bold text-slate-900">-$320.00</td>
+                                <td class="p-2.5"><span class="bg-blue-100 text-blue-800 text-[10px] px-2 py-0.5 rounded font-semibold">Hotel Laundry</span></td>
+                                <td class="p-2.5"><span class="text-amber-700 font-semibold">🟡 Pending Review (No Receipt)</span></td>
+                            </tr>
+                            <!-- ROW 3 DETAIL -->
+                            <tr id="detail-row3" class="collapsible-row bg-slate-50/80 border-l-4 border-amber-400">
+                                <td colspan="6" class="p-4 text-xs space-y-2">
+                                    <div class="font-bold text-slate-800 border-b border-slate-200 pb-1 flex justify-between">
+                                        <span>🔍 Detailed Breakdown: Commercial Detergent Ltd</span>
+                                        <span class="text-slate-500 text-[11px]">Transaction ID: #HL-2026-1102</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-slate-600 pt-1">
+                                        <div><strong class="text-slate-700">Purchased Items:</strong> 50L Eco Laundry Detergent & Softener Drums</div>
+                                        <div><strong class="text-slate-700">Receipt Status:</strong> <span class="text-amber-700 font-bold">No Physical Receipt (Manual Key-In Entry)</span></div>
+                                        <div><strong class="text-slate-700">Approved By:</strong> Siti Rahmah (Pending Admin Verification)</div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        function showModule(moduleId) {
+            const sections = ['landing', 'laundry', 'cafe', 'soap', 'workshops', 'veggies', 'master'];
+            sections.forEach(id => {
+                const el = document.getElementById('module-' + id);
+                if (el) el.classList.add('hidden');
+            });
+
+            const target = document.getElementById('module-' + moduleId);
+            if (target) target.classList.remove('hidden');
+
+            const badge = document.getElementById('current-module-badge');
+            const names = {
+                'landing': 'Main Business Selector',
+                'laundry': 'Hotel Laundry',
+                'cafe': 'Basic Kneads (Festive)',
+                'soap': 'Soap For Hope',
+                'workshops': 'Workshops',
+                'veggies': 'Giving Hap-pea-ness',
+                'master': 'Master P&L Vault'
+            };
+            badge.innerText = 'Active: ' + (names[moduleId] || 'Draft Module');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- HOTEL LAUNDRY LOGIC ---
+        function calcLaundryInvoice() {
+            const kg = parseFloat(document.getElementById('laundry-weight').value) || 0;
+            const rate = parseFloat(document.getElementById('laundry-rate').value) || 0;
+            document.getElementById('laundry-total-invoice').innerText = '$' + (kg * rate).toFixed(2);
+        }
+
+        function calcShiftPay() {
+            const hrs = parseFloat(document.getElementById('shift-hours').value) || 0;
+            const rate = parseFloat(document.getElementById('shift-rate').value) || 0;
+            document.getElementById('shift-total-pay').innerText = '$' + (hrs * rate).toFixed(2);
+        }
+
+        function logShiftToPayroll() {
+            const name = document.getElementById('staff-name').value;
+            const pay = document.getElementById('shift-total-pay').innerText;
+            alert(`Logged ${name}'s shift. Added ${pay} to Master Payroll Ledger.`);
+        }
+
+        // --- BASIC KNEADS LOGIC ---
+        let totalFestiveRevenue = 280.00;
+        let festiveOrderCount = 2;
+        let currentRestockTab = 'ocr';
+        let uploadedFileName = '';
+
+        function switchRestockTab(tab) {
+            currentRestockTab = tab;
+            ['ocr', 'upload', 'manual'].forEach(t => {
+                const content = document.getElementById('restock-tab-' + t);
+                const btn = document.getElementById('tab-btn-' + t);
+                if (t === tab) {
+                    content.classList.remove('hidden');
+                    btn.className = 'py-2 px-3 border-b-2 border-amber-600 font-bold text-amber-800';
+                } else {
+                    content.classList.add('hidden');
+                    btn.className = 'py-2 px-3 text-slate-500 hover:text-slate-800 font-medium';
+                }
+            });
+        }
+
+        function updateBakePrice() {
+            const price = parseFloat(document.getElementById('bake-package').value) || 0;
+            document.getElementById('bake-unit-price').value = price.toFixed(2);
+            const qty = parseInt(document.getElementById('bake-qty').value) || 1;
+            document.getElementById('bake-order-total').innerText = '$' + (price * qty).toFixed(2);
+        }
+
+        function updateBakePriceManual() {
+            const unitPrice = parseFloat(document.getElementById('bake-unit-price').value) || 0;
+            const qty = parseInt(document.getElementById('bake-qty').value) || 1;
+            document.getElementById('bake-order-total').innerText = '$' + (unitPrice * qty).toFixed(2);
+        }
+
+        function addFestiveOrder() {
+            const name = document.getElementById('bake-customer').value || 'Guest Order';
+            const pkgSelect = document.getElementById('bake-package');
+            const pkgName = pkgSelect.options[pkgSelect.selectedIndex].text.split(' ($')[0];
+            const qty = parseInt(document.getElementById('bake-qty').value) || 1;
+            const dateVal = document.getElementById('bake-date').value || '2026-09-20';
+            const payStatus = document.getElementById('bake-payment-status').value;
+            const unitPrice = parseFloat(document.getElementById('bake-unit-price').value) || 0;
+            const total = unitPrice * qty;
+
+            const table = document.getElementById('festive-orders-table');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="p-2 font-medium text-slate-800">${name}</td>
+                <td class="p-2">${qty}x ${pkgName}</td>
+                <td class="p-2">${dateVal}</td>
+                <td class="p-2 font-bold text-slate-900">$${total.toFixed(2)}</td>
+                <td class="p-2"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-semibold">${payStatus}</span></td>
+                <td class="p-2"><button onclick="toggleFulfill(this)" class="bg-amber-100 text-amber-800 hover:bg-amber-200 text-[10px] px-2 py-0.5 rounded font-bold">Mark Fulfilled</button></td>
+            `;
+            table.prepend(newRow);
+
+            festiveOrderCount++;
+            totalFestiveRevenue += total;
+            document.getElementById('metric-orders-count').innerText = `${festiveOrderCount} Orders`;
+            document.getElementById('metric-orders-revenue').innerText = `$${totalFestiveRevenue.toFixed(2)}`;
+
+            // Add to Master Vault Table
+            addMasterVaultEntry({
+                date: '12 Sep 2026',
+                vendor: `Pre-Order: ${name} (${qty}x ${pkgName})`,
+                amount: `+$${total.toFixed(2)}`,
+                module: 'Basic Kneads',
+                badgeClass: 'bg-amber-100 text-amber-800',
+                status: `🟢 ${payStatus}`,
+                details: `Customer: ${name} | Items: ${qty}x ${pkgName} @ $${unitPrice.toFixed(2)}/unit | Delivery: ${dateVal}`
+            });
+
+            alert(`Pre-Order logged for ${name} ($${total.toFixed(2)}). Entry posted to Master P&L!`);
+        }
+
+        function simulateBakeOCR() {
+            document.getElementById('ocr-bake-result').classList.remove('hidden');
+        }
+
+        function handleDigitalUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                uploadedFileName = file.name;
+                document.getElementById('upload-file-label').innerText = 'Selected File: ' + file.name;
+                document.getElementById('upload-file-name').innerText = file.name;
+                document.getElementById('upload-summary').classList.remove('hidden');
+            }
+        }
+
+        function postIngredientExpense() {
+            let vendor = '';
+            let amount = 0;
+            let statusBadge = '';
+            let details = '';
+
+            if (currentRestockTab === 'ocr') {
+                vendor = 'Phoon Huat Baking Supplies';
+                amount = 145.00;
+                statusBadge = '🟢 OCR Verified Receipt';
+                details = 'Items Extracted: 25kg Specialty Flour, 10kg Anchor Butter, Baking Powder. Method: OCR Scan photo.';
+            } else if (currentRestockTab === 'upload') {
+                vendor = 'Supplier Restock (Digital Upload)';
+                amount = 95.00;
+                statusBadge = '🟢 Digital Receipt Attached';
+                const fileLabel = uploadedFileName || 'digital_receipt_e-file.pdf';
+                details = `Items: Baking raw supplies restock. Attached file: ${fileLabel}`;
+            } else { // Manual
+                const manualV = document.getElementById('manual-vendor').value || 'Wet Market Purchase';
+                const manualI = document.getElementById('manual-items').value || 'Eggs & Spices';
+                amount = parseFloat(document.getElementById('manual-amount').value) || 55.00;
+                vendor = manualV;
+                statusBadge = '🟡 No Receipt (Manual Key-In)';
+                details = `Items: ${manualI} | Entered manually by kitchen team without receipt physical voucher.`;
+            }
+
+            addMasterVaultEntry({
+                date: '12 Sep 2026',
+                vendor: vendor,
+                amount: `-$${amount.toFixed(2)}`,
+                module: 'Basic Kneads',
+                badgeClass: 'bg-amber-100 text-amber-800',
+                status: statusBadge,
+                details: details
+            });
+
+            alert(`Logged restock expense (-$${amount.toFixed(2)}) to Master P&L under Basic Kneads!\nStatus: ${statusBadge}`);
+        }
+
+        let masterRowCount = 3;
+        function addMasterVaultEntry(data) {
+            masterRowCount++;
+            const rowId = 'row' + masterRowCount;
+            const vault = document.getElementById('master-vault-table');
+
+            const mainRow = document.createElement('tr');
+            mainRow.className = 'hover:bg-slate-50 cursor-pointer transition font-medium';
+            mainRow.setAttribute('onclick', `toggleRowDetail('${rowId}')`);
+            mainRow.innerHTML = `
+                <td class="p-2.5 text-slate-400 font-bold" id="icon-${rowId}">▶</td>
+                <td class="p-2.5 text-slate-800">${data.date}</td>
+                <td class="p-2.5 font-bold text-slate-900">${data.vendor}</td>
+                <td class="p-2.5 font-bold text-slate-900">${data.amount}</td>
+                <td class="p-2.5"><span class="${data.badgeClass} text-[10px] px-2 py-0.5 rounded font-semibold">${data.module}</span></td>
+                <td class="p-2.5"><span class="font-semibold">${data.status}</span></td>
+            `;
+
+            const detailRow = document.createElement('tr');
+            detailRow.id = 'detail-' + rowId;
+            detailRow.className = 'collapsible-row bg-slate-50/80 border-l-4 border-amber-500';
+            detailRow.innerHTML = `
+                <td colspan="6" class="p-4 text-xs space-y-2">
+                    <div class="font-bold text-slate-800 border-b border-slate-200 pb-1 flex justify-between">
+                        <span>🔍 Detailed Breakdown: ${data.vendor}</span>
+                        <span class="text-slate-500 text-[11px]">Transaction ID: #BK-2026-NEW</span>
+                    </div>
+                    <div class="text-slate-600 pt-1">
+                        <strong>Transaction Details:</strong> ${data.details}
+                    </div>
+                </td>
+            `;
+
+            vault.prepend(detailRow);
+            vault.prepend(mainRow);
+        }
+
+        function toggleRowDetail(rowId) {
+            const detail = document.getElementById('detail-' + rowId);
+            const icon = document.getElementById('icon-' + rowId);
+            if (detail) {
+                detail.classList.toggle('open');
+                if (detail.classList.contains('open')) {
+                    if (icon) icon.innerText = '▼';
+                } else {
+                    if (icon) icon.innerText = '▶';
+                }
+            }
+        }
+
+        let allExpanded = false;
+        function toggleAllMasterRows() {
+            allExpanded = !allExpanded;
+            const rows = document.querySelectorAll('.collapsible-row');
+            rows.forEach(r => {
+                if (allExpanded) r.classList.add('open');
+                else r.classList.remove('open');
+            });
+        }
+
+        function toggleFulfill(btn) {
+            if (btn.innerText === 'Mark Fulfilled') {
+                btn.innerText = '✓ Completed';
+                btn.className = 'bg-emerald-600 text-white text-[10px] px-2 py-0.5 rounded font-bold';
+            } else {
+                btn.innerText = 'Mark Fulfilled';
+                btn.className = 'bg-amber-100 text-amber-800 hover:bg-amber-200 text-[10px] px-2 py-0.5 rounded font-bold';
+            }
+        }
+
+        function calculateBakeIngredients() {
+            const item = document.getElementById('batch-target-item').value;
+            const mult = parseFloat(document.getElementById('batch-multiplier').value) || 1;
+
+            if (item === 'pineapple') {
+                document.getElementById('ing-flour').innerText = (12.5 * mult).toFixed(1) + ' kg';
+                document.getElementById('ing-butter').innerText = (8.0 * mult).toFixed(1) + ' kg';
+                document.getElementById('ing-filling').innerText = (15.0 * mult).toFixed(1) + ' kg';
+                document.getElementById('ing-spices').innerText = (30 * mult) + ' Eggs / Cinnamon Sticks';
+                document.getElementById('ingredient-cost-est').innerText = 'Est. Cost: $' + (125 * mult).toFixed(2);
+            } else if (item === 'cookies') {
+                document.getElementById('ing-flour').innerText = (10.0 * mult).toFixed(1) + ' kg';
+                document.getElementById('ing-butter').innerText = (11.0 * mult).toFixed(1) + ' kg';
+                document.getElementById('ing-filling').innerText = (6.0 * mult).toFixed(1) + ' kg Powdered Sugar';
+                document.getElementById('ing-spices').innerText = (20 * mult) + ' Vanilla Pods / Salt';
+                document.getElementById('ingredient-cost-est').innerText = 'Est. Cost: $' + (95 * mult).toFixed(2);
+            } else {
+                document.getElementById('ing-flour').innerText = (15.0 * mult).toFixed(1) + ' kg Bread Flour';
+                document.getElementById('ing-butter').innerText = (4.0 * mult).toFixed(1) + ' L Olive Oil';
+                document.getElementById('ing-filling').innerText = (5.0 * mult).toFixed(1) + ' kg Dried Herbs & Tomatoes';
+                document.getElementById('ing-spices').innerText = (2 * mult) + ' kg Sea Salt & Yeast';
+                document.getElementById('ingredient-cost-est').innerText = 'Est. Cost: $' + (80 * mult).toFixed(2);
+            }
+        }
+
+        function exportFestiveOrders() {
+            alert("EXPORTING FESTIVE BAKE SCHEDULE:\n----------------------------------\n1. Rachel Tan - 2x Pineapple Tart Set (Due 20 Sep)\n2. DBS CSR Team - 3x Grand Gift Box (Due 22 Sep)\n----------------------------------");
+        }
+
+        // --- SOAP FOR HOPE LOGIC ---
+        function calcSoapYield() {
+            const kg = parseFloat(document.getElementById('soap-scrap-kg').value) || 1;
+            const bars = parseFloat(document.getElementById('soap-bars-out').value) || 0;
+            const yieldPercent = Math.min(100, ((bars * 0.067) / kg) * 100).toFixed(1);
+            document.getElementById('soap-yield-percent').innerText = yieldPercent + '% Yield';
+        }
+
+        function generateSoapImpactPDF() {
+            alert("GENERATE DONOR PDF REPORT:\n--------------------------------\nSOAP FOR HOPE IMPACT SUMMARY\nSponsor: Rotary Club\nGrant Remaining: $1,200.00\nTotal Soap Delivered: 1,600 Bars\n--------------------------------");
+        }
+
+        // --- WORKSHOPS LOGIC ---
+        function calcWorkshopQuote() {
+            const pax = parseFloat(document.getElementById('workshop-pax').value) || 1;
+            let rate = 25.0;
+            if (document.getElementById('addon-oils').checked) rate += 3.0;
+            if (document.getElementById('addon-flowers').checked) rate += 2.0;
+            if (document.getElementById('addon-boxes').checked) rate += 2.0;
+
+            document.getElementById('ws-rate-pax').innerText = '$' + rate.toFixed(2) + ' / pax';
+            document.getElementById('ws-total-quote').innerText = '$' + (pax * rate).toFixed(2);
+        }
+
+        // --- GIVING HAP-PEA-NESS LOGIC ---
+        function simulateVeggieOCR() {
+            document.getElementById('veggie-ocr-result').classList.remove('hidden');
+            calculateVeggieYield();
+        }
+
+        function calculateVeggieYield() {
+            const bags = parseFloat(document.getElementById('completed-bags-input').value) || 1;
+            const weightPerBag = (120.0 / bags).toFixed(1);
+            const netCost = ((600.0 + (bags * 0.75) + (bags * 1.50)) / bags).toFixed(2);
+            document.getElementById('calc-bag-weight').innerText = weightPerBag + ' kg / bag';
+            document.getElementById('calc-net-cost').innerText = '$' + netCost + ' / bag';
+        }
+
+        function saveVeggieBatch() {
+            const bags = document.getElementById('completed-bags-input').value || '40';
+            const table = document.getElementById('veggie-batch-table');
+            const row = `<tr>
+                <td class="p-2 font-medium text-slate-800">#VP-2026-09</td>
+                <td class="p-2">120.0 kg</td>
+                <td class="p-2">${bags} bags</td>
+                <td class="p-2 font-bold text-emerald-700">$17.25</td>
+                <td class="p-2"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded">DBS Grant</span></td>
+            </tr>`;
+            table.innerHTML = row + table.innerHTML;
+            alert('Campaign batch logged! Posted to Master Vault under Giving Hap-pea-ness.');
+        }
+    </script>
+</body>
+</html>
